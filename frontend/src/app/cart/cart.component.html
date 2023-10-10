@@ -1,0 +1,66 @@
+<!-- <div class="cart">
+    <h2>Your Cart</h2>
+    <div *ngFor="let item of cartItems">
+      <div class="cart-item">
+        <div class="product-details">
+          <h3>{{ item.productName }}</h3>
+          <p>Price: ${{ item.productPrice }}</p>
+        </div>
+        <div class="quantity">
+          <p>Quantity: {{ item.quantity }}</p>
+        </div>
+        <div class="total">
+          <p>Total: ${{ item.quantity * item.productPrice }}</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+<div class ="main-content center-table">
+
+    <div class ="heading" *ngIf="cartItems.length > 0">Your cart </div>
+    <div class ="heading-no" *ngIf="cartItems.length == 0">Your Cart is Empty </div>
+
+    <div class = "card" *ngIf="cartItems.length > 0">
+  <div class="table-wrap table-bordered">
+    <table class="table">
+    <thead class="thead">
+    <tr>
+    <th>Product</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+    <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="data" *ngFor="let item of cartItems">
+    <td>
+    <div class="product">
+    <span>{{ item.productName }}</span>
+    </div>
+    </td>
+    <td>${{ item.productPrice }}</td>
+    <td class="quantity">{{ item.quantity }}
+    <div>
+    
+    </div>
+    </td>
+    <td> ${{ item.quantity * item.productPrice }}</td>
+    <td>
+    <button type="button" (click)="removeCartItem(item.productId)" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true"><i class="fa fa-close" style="color: red;"></i></span>
+    </button>
+    </td>
+    </tr>
+  
+    </tbody>
+    </table>
+    </div>
+    <button class="button" (click)="placeOrder(cartItems)">Order</button>
+    <!-- <ngx-toastr></ngx-toastr> -->
+
+
+  </div>
+  
+  </div>

@@ -1,0 +1,17 @@
+<app-header></app-header>
+<div class ="container-main">
+  
+  <div class="dash-content">
+    <app-sidebar *ngIf="shouldDisplaySidebar()"></app-sidebar>
+   
+    </div> 
+    <!-- <ngx-toastr></ngx-toastr>  -->
+    <div class ="body-content">
+      <router-outlet></router-outlet>
+    </div>
+</div>
+
+<!-- <ngx-ui-loader></ngx-ui-loader> -->
+
+
+<!-- <app-footer></app-footer> -->

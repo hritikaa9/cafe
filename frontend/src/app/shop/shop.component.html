@@ -1,0 +1,32 @@
+
+<div class="dashboard">
+    <div class="main-content">
+        <div class ="category" *ngFor="let cat of category">
+        <h1>{{ cat.name }}</h1>
+        <div class="card-row" style="padding-bottom: 0px">
+            <div class="card"  *ngFor="let product of productsByCategory[cat.id]">
+                <div class="content-row">
+                    <h3 class="card-title">{{product.name}}</h3>
+                    <p class="card-description">
+                        <!-- <i class="fas fa-edit" style="font-size: 35px"></i> -->
+                    </p>
+                </div>
+                <div class="card-data">
+                    <p>$ {{product.price}}</p>
+                </div>
+                <div class = "order">
+                    <div class ="addbtn" (click)="addProductToCart(product.id, product.name, product.price)"><i class="fa fa-plus"></i></div>
+                    <div class ="addbtn" (click)="removeProductFromCart(product.id)" *ngIf="getProductQuantityInCart(product.id) > 0"><i class="fa fa-minus" aria-hidden="true"></i></div>
+                    <div class ="numberbtn" *ngIf="getProductQuantityInCart(product.id) > 0">{{getProductQuantityInCart(product.id)}}</div>
+                </div>
+            </div>
+      
+    </div>
+
+<hr>
+</div>
+</div>
+
+
+
+

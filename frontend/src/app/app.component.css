@@ -1,0 +1,9 @@
+.container-main{
+    display: flex;
+    height: 100%;
+    
+}
+
+.body-content{
+    flex-grow: 1;
+}

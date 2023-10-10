@@ -1,0 +1,54 @@
+
+    <div class="dashboard">
+        <div class="main-content">
+            <div class="card-row" style="padding-bottom: 0px">
+ 
+                <div class="card" [routerLink]="['/categories']">
+                    <div class="content-row">
+                        <h3 class="card-title">Category</h3>
+                        <p class="card-description">
+                            <i class="fas fa-coins" style="font-size: 35px"></i>
+                        </p>
+                    </div>
+                    <div class="card-data">
+                        <p>{{details.category}}</p>
+                    </div>
+                </div>
+    
+        
+                <div class="card" [routerLink]="['/products']">
+                    <div class="content-row">
+                        <h3 class="card-title">Product</h3>
+                        <p class="card-description">
+                            <i class="fas fa-edit" style="font-size: 35px"></i>
+                        </p>
+                    </div>
+                    <div class="card-data">
+                        <p>{{details.products}}</p>
+                    </div>
+                </div>
+    
+
+                <div class="card" [routerLink]="['/bills']">
+                    <div class="content-row">
+                        <h3 class="card-title">Bills</h3>
+                        <p class="card-description">
+                            <i class="fas fa-pen" style="font-size: 35px"></i>
+                        </p>
+                    </div>
+                    <div class="card-data">
+                        <p>{{details.bill}}</p>
+                    </div>
+                </div>
+
+
+    
+          
+        </div>
+    </div>
+
+    
+
+  
+ 
+    
