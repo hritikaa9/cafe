@@ -23,11 +23,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
-import { ShopComponent } from './shop/shop.component';
+import { ShopComponent } from './pages/user/shop/shop.component';
 import { JWT_OPTIONS, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
-import { CartComponent } from './cart/cart.component';
+// import { CartComponent } from './cart/cart.component';
+import { CartComponent } from './pages/user/cart/cart.component';
 import {JwtInterceptorInterceptor} from './jwt-interceptor.interceptor';
-import { ProfileComponent } from './profile/profile.component';
+// import { ProfileComponent } from '.pages/user/profile/profile.component';
+import { ProfileComponent } from './pages/user/profile/profile.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';

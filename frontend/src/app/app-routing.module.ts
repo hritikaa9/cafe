@@ -10,10 +10,12 @@ import { ManageOrdersComponent } from './pages/admin/manage-orders/manage-orders
 import { ViewBillsComponent } from './pages/admin/view-bills/view-bills.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
-import { ShopComponent } from './shop/shop.component';
+import { ShopComponent } from './pages/user/shop/shop.component';
 import { AuthGuard } from './auth.guard';
-import { CartComponent } from './cart/cart.component';
-import { ProfileComponent } from './profile/profile.component';
+// import { CartComponent } from './cart/cart.component';
+import { CartComponent } from './pages/user/cart/cart.component';
+import { ProfileComponent } from './pages/user/profile/profile.component';
+import { BestSellerComponent } from './best-seller/best-seller.component';
 
 
 
