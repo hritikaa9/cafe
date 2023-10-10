@@ -6,6 +6,49 @@
     .story-card {
         width: 100%;
     }
+    .addbtn{
+        justify-content: end;
+        background-color: white; 
+        border: none;
+        color: #537188;
+        padding: 5px 13px;
+        text-align: right;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        border-radius: 8px;
+        margin-left: 13px;
+    }
+
+    .numberbtn{
+        justify-content: end;
+        background-color: white; 
+        border: none;
+        color: #537188;
+        padding: 5px 13px;
+        text-align: right;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        border-radius: 28px;
+        margin-left: 13px;
+    }
+    .card {
+        width: 35vh;
+        height: 200px;
+        background-color: #537188;
+        border-radius: 10px;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+        margin-bottom: 20px;
+
+        vertical-align: center;
+        justify-items: center;
+
+        font-family: Belanosima;
+        color: white;
+        display: flex;
+    }
 }
 
 .stories {
@@ -113,19 +156,7 @@
     padding-right: 10px;
 }
 
-.list-view {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
 
-.list-title {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-}
 
 .list-items {
     list-style: none;
@@ -133,26 +164,8 @@
     margin: 0;
 }
 
-.list-items li {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 8px;
-    padding-left: 16px;
-    position: relative;
-}
 
-.list-items li:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #333;
-}
-
-@media only screen and (min-width: 992px) {
+@media screen and (min-width: 992px) {
     .card {
         width: 35vh;
         height: 200px;
@@ -170,15 +183,10 @@
         display: flex;
     }
 
-    .story-card {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
-
+ 
     .order{
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
     }
 
 

@@ -31,7 +31,7 @@ const createUser = async (req, res) =>{
                 }
                 const response = { email: result.rows[0].email, role: result.rows[0].role,  id: result.rows[0].id, name: result.rows[0].name};
                 const accessToken = jwt.sign(response, process.env.ACCESS_TOKEN, { expiresIn: '8h' });
-                res.status(200).json({message: 'User created successfully'})
+                res.status(200).json({message: 'User created successfully',accessToken})
                 // console.log(result)
                 // console.log(result.rows[0])
             })

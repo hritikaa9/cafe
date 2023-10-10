@@ -24,7 +24,8 @@ export class SignupComponent implements OnInit {
 
   addUser(data: any){
     this.userDetail.signUp(data).subscribe((response:any)=>{
-    localStorage.setItem('token',response.token);
+    localStorage.setItem('token',response.accessToken);
+    console.log(response);
     this.router.navigate(['/shop'])
     },
     error => {

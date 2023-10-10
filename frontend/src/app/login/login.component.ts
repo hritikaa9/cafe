@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit{
   Login(data:any){
     this.userDetail.login(data).subscribe((response:any)=>{
       localStorage.setItem('token',response.token);
+      console.log(response);
+      
       if(this.isUser()){
         this.router.navigate(['/shop'])
       }
