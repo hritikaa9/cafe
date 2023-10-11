@@ -61,7 +61,7 @@ export class ManageProductsComponent implements OnInit{
 
   loadProduct() {
     this.productDetail.getProducts().subscribe((data) => {
-    
+    console.log(data)
   this.products = data;
 
   this.dataSource = new MatTableDataSource<P>(this.products)
@@ -160,8 +160,11 @@ deleteProduct(id: any) {
 
 updateProduct(data: any) {
   this.product.category_id = this.selectedCategoryId;
+  // console.log(this.product);
+  
   this.productDetail.updateProduct(data, this.product.id).subscribe((updatedData) => {
     console.log(updatedData);
+    this.loadProduct()
     const index = this.products.findIndex((item: any) => item.id === this.product.id);
 
     if (index !== -1) {
@@ -189,14 +192,16 @@ onFormSubmit() {
 getById(id: any) {
   $('#productModal').modal('show');
   this.productDetail.getProductById(id).subscribe((data: any) => {
+    
     this.product = {...data[0]}
+    // console.log(this.product);
     // this.product.id = data[0].id;
     // console.log(this.product.id);
     // this.product.name = data[0].name;
     // this.product.price = data[0].price;
     // this.product.description = data[0].description;
-    // this.product.category_name = data[0].categoryname;
-    // this.selectedCategoryId = data[0].categoryid;
+    // this.product.categoryname = data[0].categoryname;
+    this.selectedCategoryId = data[0].category_id;
   });
 }
 

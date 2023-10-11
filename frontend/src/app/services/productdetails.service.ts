@@ -18,5 +18,3 @@ export class ProductdetailsService {
     return this.http.post(`${this.url}/addProducts`, data);
   }
 }
-
-//getProducts
