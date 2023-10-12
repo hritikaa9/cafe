@@ -23,7 +23,6 @@ const generateReport = async(req, res) =>{
     console.log(productDetailsReport)
     console.log(req.body.user)
     console.log(total)
-    // console.log(res.locals.email)
        const query = "insert into bill(name, uuid, email, contactnumber, paymentmethod, total, productdetails, createdby) values ($1, $2, $3, $4, $5,$6, $7, $8)";
     //    const values = [name, generatedUuid, email, contactNumber,paymentMethod, totalAmount, productDetails, res.locals.email] 
         console.log("check6")
@@ -64,12 +63,8 @@ const generateReport = async(req, res) =>{
 
     }
     catch{
-       
         res.status(500).json({ error: 'error'});
-      
-
     }
-//  next()
 }
 
 
