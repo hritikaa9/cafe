@@ -10,7 +10,6 @@ var uuid = require('uuid');
 
 
 const generateReport = async(req, res) =>{
-    console.log("Check1")
     try{
         console.log("Check2")
        const generatedUuid = uuid.v1();
@@ -19,12 +18,8 @@ const generateReport = async(req, res) =>{
        const productDetailsList  = req.body.productDetailsList;
        const total = req.body.total;
        console.log("Check4")
-    //    console.log(productDetailsList)
-    //    console.log(JSON.parse(productDetails))
-    //    var productDetailsReport = JSON.parse(productDetails);
     console.log("Check5")
     var productDetailsReport = productDetailsList
-    //    console.log("check3")
     console.log(productDetailsReport)
     console.log(req.body.user)
     console.log(total)

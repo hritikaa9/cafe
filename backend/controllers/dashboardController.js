@@ -31,7 +31,6 @@ const getDetails = async (req, res) =>{
         var query = "select count(id) as billCount from bill";
         await client.query(query, (err, results)=>{
             if(!err){
-                console.log("check1")
                 billCount = results.rows[0].billcount;
                 var data ={
                     category :categoryCount,

@@ -21,7 +21,6 @@ const createUser = async (req, res) =>{
         if (checkResult.rowCount>0){
             res.status(400).json({error:'Email already exists. '});
         } else{
-            // console.log("check1")
             const insertQuery = 'INSERT INTO users (name, contact, email, password, status, role) VALUES ($1, $2, $3, $4, $5, $6) returning *';
             const insertValues = [name, contact, email, password, "true", "User"];
             // console.log("rrrr")
