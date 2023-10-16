@@ -206,7 +206,7 @@
     vertical-align: middle;
   }
   .bg-image {
-    background-image: url("../../assets/img/food1.jpg");
+    background-image: url("../../../../assets/img/food1.jpg");
     filter: blur(3px);
     -webkit-filter: blur(3px);
     height: 100%; 

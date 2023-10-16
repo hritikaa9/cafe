@@ -4,24 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BestSellerComponent } from './best-seller/best-seller.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
-import { HomepageComponent } from './homepage/homepage.component';
-import { HeaderComponent } from './layouts/header/header.component';
-import { FooterComponent } from './layouts/footer/footer.component';
+import { HomepageComponent } from './pages/common/homepage/homepage.component';
+import { HeaderComponent } from './pages/common/layouts/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SignupComponent } from './signup/signup.component';
+import { SignupComponent } from './pages/common/signup/signup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { SidebarComponent } from './pages/common/layouts/sidebar/sidebar.component';
 import { ManageCategoriesComponent } from './pages/admin/manage-categories/manage-categories.component';
 import { ManageProductsComponent } from './pages/admin/manage-products/manage-products.component';
 import { ManageOrdersComponent } from './pages/admin/manage-orders/manage-orders.component';
-import { ViewBillsComponent } from './pages/admin/view-bills/view-bills.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './pages/common/page-not-found/page-not-found.component';
 import { ToastrModule } from 'ngx-toastr';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './pages/common/login/login.component';
 import { RouterModule } from '@angular/router';
 import { ShopComponent } from './pages/user/shop/shop.component';
 import { JWT_OPTIONS, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
@@ -44,17 +41,14 @@ import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
-    BestSellerComponent,
     DashboardComponent,
     HomepageComponent,
     HeaderComponent,
-    FooterComponent,
     SignupComponent,
     SidebarComponent,
     ManageCategoriesComponent,
     ManageProductsComponent,
     ManageOrdersComponent,
-     ViewBillsComponent,
      PageNotFoundComponent,
      LoginComponent,
      ShopComponent,
