@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/services/product.service';
 import{CategoryService} from '../../../services/category.service';
 import{ProductdetailsService} from '../../../services/productdetails.service';
 import { BillsService } from 'src/app/services/bills.service';
+import { ToastrService } from 'ngx-toastr';
 
 interface ProductDetail {
   id: number;
@@ -45,7 +46,7 @@ details: ProductDetail = {
 
 
 
-  constructor(private productData: ProductService, private categoryData: CategoryService, private orderDetails: BillsService){}
+  constructor(private productData: ProductService, private categoryData: CategoryService, private orderDetails: BillsService, private toastr: ToastrService){}
   loadProduct(){
     this.productData.getProducts().subscribe((data)=>{
       this.products = data;
@@ -63,21 +64,6 @@ details: ProductDetail = {
     this.loadCategory();
     this.loadProduct();
   }
-
-// getDetails(){
-//   this.productDetailsService.getDetails().subscribe((data)=>{
-//     this.details = data
-//     console.log(data);
-//   });
-// }
-
-
-// addDetail(){
-//   this.productDetailsService.addDetail(this.details).subscribe((data)=>{
-//     console.log(data);
-//     this.details ={};
-//   });
-// }
 
 
 productDetailsList: ProductDetail[] = [];
@@ -110,12 +96,7 @@ calculateTotal() {
 }
 
 
-// createOrder(data:any){
-// data = [...data, this.productDetailsList]
-// this.orderDetails.addOrder(data).subscribe((data)=>{
-// console.log(data);
-// })
-// }
+
 
 createOrder(formData:any){
   console.log(formData)
@@ -127,7 +108,8 @@ createOrder(formData:any){
   console.log(orderData)
 
   this.orderDetails.addOrder(orderData).subscribe((orderData)=>{
-      console.log(orderData)
+
+      this.toastr.success('Bill has been submitted');
   })
 
 }
