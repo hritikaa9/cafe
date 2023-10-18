@@ -5,6 +5,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 declare var $: any;
 export interface P{
@@ -42,26 +43,85 @@ export class ManageProductsComponent implements OnInit{
  categoryname: '',
 }
 
+products_detail :any
   displayedColumns: string[] = ['name', 'categoryname', 'description', 'price', 'edit', 'delete']; 
   dataSource: any;
   products: any;
 
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
-  constructor(private productDetail : ProductService, private categoryDetail: CategoryService){
+  constructor(private productDetail : ProductService, private categoryDetail: CategoryService ){
+    this.products_detail = new FormGroup({
+      id :new FormControl(),
+      name: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
+      category_id: new FormControl(),
+      description: new FormControl('', Validators.required),
+      categoryname: new FormControl(),
+      selectedCategoryId: new FormControl()
+    })
   }
 
-  // loadProduct(){
-  //   this.productDetail.getProducts().subscribe((data)=>{
-  //     this.products = data;
-  //     console.log(this.products);
-  //   })
-  // }
+  get id(){
+    return this.products_detail.get('id')
+  }
 
+  get name(){
+    return this.products_detail.get('name')
+  }
+
+  get price(){
+    return this.products_detail.get('price')
+  }
+
+  get category_id(){
+    return this.products_detail.get('category_id')
+  }
+
+  get description(){
+    return this.products_detail.get('description')
+  }
+  get categoryname(){
+    return this.products_detail.get('categoryname')
+  }
+
+  onFormSubmit() {
+
+    if (this.products_detail.value.id) {
+      this.updateProduct(this.product);
+    } else {
+      this.addProduct(this.product);
+    }
+  }
+  
+  addProduct(data: any){
+    this.product = { ...this.products_detail.value };
+    this.product.category_id = this.products_detail.value.selectedCategoryId;
+    this.productDetail.addProduct(this.product).subscribe((data)=>{
+      this.loadProduct();
+      this.products_detail.reset();
+    })
+  }
+  updateProduct(data: any) {
+    this.product.category_id = this.selectedCategoryId;
+    this.product = {...this.products_detail}
+    this.productDetail.updateProduct(this.product, this.product.id).subscribe((updatedData) => {
+      console.log(updatedData);
+      this.loadProduct()
+      const index = this.products.findIndex((item: any) => item.id === this.product.id);
+  
+      if (index !== -1) {
+  
+        this.products[index] = updatedData;
+        this.dataSource.data = this.products;
+        console.log(this.dataSource.data)
+      }
+    });
+  }
+  
 
   loadProduct() {
     this.productDetail.getProducts().subscribe((data) => {
-    console.log(data)
   this.products = data;
 
   this.dataSource = new MatTableDataSource<P>(this.products)
@@ -71,17 +131,6 @@ export class ManageProductsComponent implements OnInit{
   }
 
 
-  // loadProduct(){
-  //   const offset = (this.currentPage -1)*this.itemsPerPage;
-
-  //   this.productDetail.getProductPage(offset, this.itemsPerPage).subscribe((data)=>{
-  //     this.products = data;
-
-  //     this.productDetail.getTotalProducts().subscribe((total)=>{
-  //       this.totalProducts = total;
-  //     })
-  //   })
-  // }
 
   onPageChanged(newPage: number): void {
     this.currentPage = newPage;
@@ -91,31 +140,11 @@ export class ManageProductsComponent implements OnInit{
   loadCategory(){
   this.categoryDetail.getCategories().subscribe((data) =>{
     this.category = data;
-    // console.log(data)
-  
    })
 }
 
-addProduct(data: any){
-  this.product.category_id = this.selectedCategoryId;
-  console.log('data', data)
-  this.productDetail.addProduct(data).subscribe((data)=>{
-    this.loadProduct();
-  })
-}
 
-// onSearch() {
-//   if (this.searchQuery.trim() === '') {
-//     this.loadProduct();
-//     console.log(this.searchQuery)
-//   } else {
-//     this.products = this.products.filter((item:any) =>
-//       item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-//     );
-//     console.log(this.searchQuery)
-//   }
 
-// }
 onSearch() {
   if (this.searchQuery.trim() === '') {
     this.loadProduct(); 
@@ -127,16 +156,6 @@ onSearch() {
   }
 }
 
-
-// deleteProduct(id:any){
-//   this.productDetail.deleteProduct(id).subscribe((data)=>{
-//     console.log(data)
-//     const index = this.products.findIndex((item :any) => item.id === id);
-//     if (index !== -1) {
-//       this.products.splice(index, 1);
-//     }
-//   })
-// }
 deleteProduct(id: any) {
   this.productDetail.deleteProduct(id).subscribe((data) => {
     console.log(data);
@@ -151,43 +170,10 @@ deleteProduct(id: any) {
 }
 
 
-// updateProduct(data:any){
-//   this.productDetail.updateProduct(data, this.product.id).subscribe((data)=>{
-//     console.log(data)
-//     this.loadProduct()
-//   })
-// }
-
-updateProduct(data: any) {
-  this.product.category_id = this.selectedCategoryId;
-  // console.log(this.product);
-  
-  this.productDetail.updateProduct(data, this.product.id).subscribe((updatedData) => {
-    console.log(updatedData);
-    this.loadProduct()
-    const index = this.products.findIndex((item: any) => item.id === this.product.id);
-
-    if (index !== -1) {
-      // console.log(updatedData);
-      this.products[index] = updatedData;
-      this.dataSource.data = this.products;
-      console.log(this.dataSource.data)
-    }
-  });
-}
 
 
 
-onFormSubmit() {
-  console.log("kkk")
-  console.log(this.product)
-  console.log(this.product.id)
-  if (this.product.id) {
-    this.updateProduct(this.product);
-  } else {
-    this.addProduct(this.product);
-  }
-}
+
 
 getById(id: any) {
   $('#productModal').modal('show');

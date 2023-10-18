@@ -11,52 +11,31 @@ var uuid = require('uuid');
 
 const generateReport = async(req, res) =>{
     try{
-        console.log("Check2")
+   
+      
        const generatedUuid = uuid.v1();
-       console.log("Check3")
        const {name, email, contact,payment} = req.body.user;
-       const productDetailsList  = req.body.productDetailsList;
+       const productd  = req.body.productDetailsList;
+       const productDetailsList = JSON.stringify(productd)
        const total = req.body.total;
-       console.log("Check4")
-    console.log("Check5")
     var productDetailsReport = productDetailsList
-    console.log(productDetailsReport)
-    console.log(req.body.user)
-    console.log(total)
+
+
        const query = "insert into bill(name, uuid, email, contactnumber, paymentmethod, total, productdetails, createdby) values ($1, $2, $3, $4, $5,$6, $7, $8)";
     //    const values = [name, generatedUuid, email, contactNumber,paymentMethod, totalAmount, productDetails, res.locals.email] 
-        console.log("check6")
+    
+        console.log(name, generatedUuid, email, contact,payment, total, productDetailsList);
     const values = [name, generatedUuid, email, contact,payment, total, productDetailsList, "Admin"] 
     //    console.log("check4")
     //    console.log(generatedUuid)
-    console.log("check7")
-       await client.query(query, values, (err, results)=>{
-        if(!err){
-            console.log("check5")
-            console.log(path.join(__dirname, '', "report.ejs"))
-            ejs.renderFile(path.join(__dirname, '', "report.ejs"),{
-                productDetails: productDetailsReport, name: name, email:email, contactnumber:contactnumber, paymentmethod:paymentmethod, total:total
-            },(err, results)=>{
-                if(err){
-                    console.log("check7")
-                    console.log(err)
-                    return res.status(500).json(err);
-                }
-                else{
-                    console.log("check8")
-                    pdf.create(results).toFile('./generated_pdf/' +generatedUuid+".pdf", function(err, data){
-                        if(err){
-                            console.log(err);
-                            return res.status(500).json(err);
-                        }
-                        else{
-                            return res.status(200).json({uuid: generatedUuid});
-                        }
-                    })
-                }
-            })
-        }
+
+    await client.query(query, values, (err, results)=>{
+     if(!err){
+
+        return res.status(200).json({message:"Bill generaed successfully"});
+     }
         else{
+            console.log(err);
             return res.status(500).json(err)
         }
        } )

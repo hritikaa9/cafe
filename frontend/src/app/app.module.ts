@@ -10,7 +10,7 @@ import { HeaderComponent } from './pages/common/layouts/header/header.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './pages/common/signup/signup.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './pages/common/layouts/sidebar/sidebar.component';
 import { ManageCategoriesComponent } from './pages/admin/manage-categories/manage-categories.component';
 import { ManageProductsComponent } from './pages/admin/manage-products/manage-products.component';
@@ -22,10 +22,8 @@ import { LoginComponent } from './pages/common/login/login.component';
 import { RouterModule } from '@angular/router';
 import { ShopComponent } from './pages/user/shop/shop.component';
 import { JWT_OPTIONS, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
-// import { CartComponent } from './cart/cart.component';
 import { CartComponent } from './pages/user/cart/cart.component';
 import {JwtInterceptorInterceptor} from './jwt-interceptor.interceptor';
-// import { ProfileComponent } from '.pages/user/profile/profile.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -81,6 +79,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    ReactiveFormsModule
 
   
   ],

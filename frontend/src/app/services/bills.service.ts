@@ -12,6 +12,8 @@ export class BillsService {
 
 
   addOrder(data :any){
+    console.log("Service b")
+    console.log("data", data)
     return this.httpClient.post(`${this.url}/generateReport`, data)
   
   }

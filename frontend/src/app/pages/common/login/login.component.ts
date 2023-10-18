@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,18 +12,32 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit{
 
-  user ={
-    email :'',
-    password:'',
-  }
+  // user ={
+  //   email :'',
+  //   password:'',
+  // }
+  user : any;
 
-  constructor(private userDetail: UserService,private router : Router, private authService: AuthService, private toastr: ToastrService){}
+  constructor(private userDetail: UserService,private router : Router, private authService: AuthService, private toastr: ToastrService){
+    this.user = new FormGroup({
+      email : new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+      });
+  }
   ngOnInit(): void {
     
   }
 
-  Login(data:any){
-    this.userDetail.login(data).subscribe((response:any)=>{
+  get email(){
+    return this.user.get('email')
+  }
+
+  get password(){
+    return this.user.get('password')
+  }
+
+  Login(){
+    this.userDetail.login(this.user.value).subscribe((response:any)=>{
       localStorage.setItem('token',response.token);
       console.log(response);
       

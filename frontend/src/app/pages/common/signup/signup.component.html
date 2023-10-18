@@ -3,86 +3,82 @@
        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
           <div class="card">
              
-             <form #signupform = "ngForm" (ngSubmit)="signupform.form.valid && addUser(signupform.value) " >
-             <h3>Register</h3>
+  
 
-             <div class="form-group">
-                
-                <input
-                type="text"
-                class="form-control"
-                id="name"
-                placeholder="Enter Name"
-                [(ngModel)]="user.name"
-                name="name"
-                required
-                #name = "ngModel"
-                [ngClass]="{ 'border-danger': signupform.submitted && name.invalid }"
-                />
-                <div *ngIf="signupform.submitted && name.invalid" class="alert alert-danger">
-                   Name is required.
-                </div>
-             </div>
-             <br />
-             <div class="form-group">
+             <form [formGroup] = 'user' (ngSubmit)="addUser()" >
+               <h3>Register</h3>
+  
+               <div class="form-group">
+                  
+                  <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  placeholder="Enter Name"
+                  name="name"
+                  formControlName ='name'
+                  />
+                  <div class ="alert alert-danger" *ngIf ="name.touched && name.invalid">
+                     <div *ngIf="name.errors?.required">Name is required...</div>
                
-               <input
-               type="number"
-               class="form-control"
-               id="contact"
-               placeholder="Enter contact number"
-               [(ngModel)]="user.contact"
-               name="contact"
-               required
-               #contact = "ngModel"
-               [ngClass]="{ 'border-danger': signupform.submitted && contact.invalid }"
-           
-               />
-               <div *ngIf="signupform.submitted && contact.invalid" class="alert alert-danger">
-                  Valid Number is required.
+                   </div>
                </div>
-            </div>
-            <br/>
-             <div class="form-group">
+               <br />
+               <div class="form-group">
+                 
+                 <input
+                 type="number"
+                 class="form-control"
+                 id="contact"
+                 placeholder="Enter contact number"
+                 name="contact"
+                 formControlName ='contact'
+                 />
+                 <div class ="alert alert-danger" *ngIf ="contact.touched && contact.invalid">
+                  <div *ngIf="contact.errors?.required">Contact is required</div>
+                  <div *ngIf="contact.errors?.pattern">Contact shold be numbers</div>
+
+                </div>
+              </div>
+              <br/>
+               <div class="form-group">
+                 
+                  <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Enter email"
+                  formControlName ='email'
+                  name="email"
                
-                <input
-                type="email"
-                class="form-control"
-                id="email"
-                placeholder="Enter email"
-                [(ngModel)]="user.email"
-                name="email"
-                required
-                #email = "ngModel"
-                [ngClass]="{ 'border-danger': signupform.submitted && email.invalid }"
-                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
-                />
-                <div *ngIf="signupform.submitted && email.invalid" class="alert alert-danger">
-                   Valid Email is required.
-                </div>
-             </div>
-             <br />
-             <div class="form-group">
-                <input
-                type="password"
-                class="form-control"
-                id="password"
-                placeholder="Enter password"
-                [(ngModel)]="user.password"
-                name="password"
-                required
-                #password = "ngModel"
-                [ngClass]="{ 'border-danger': signupform.submitted && password.invalid }"
-                minlength="6"
-                />
-                <div *ngIf="signupform.submitted && password.invalid" class="alert alert-danger">
-                   Password of minimum 6 length is required.
-                </div>
-             </div>
-             <br />
-       
-             <button type="submit" class="btncls" >Register</button>
-             </form>
+                  />
+                  <div class ="alert alert-danger" *ngIf ="email.touched && email.invalid">
+                     <div *ngIf="email.errors?.required">Email is required</div>
+                     <div *ngIf="email.errors?.pattern">Enter valid emails</div>
+   
+                   </div>
+               </div>
+               <br />
+               <div class="form-group">
+                  <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Enter password"
+                  name="password"
+         
+                  formControlName ='password'
+                  />
+                  <div class ="alert alert-danger" *ngIf ="password.touched && password.invalid">
+                     <div *ngIf="password.errors?.required">Password is required...</div>
+                     <div *ngIf="password.errors?.minlength">Enter password of Atleast 6 charcters</div>
+
+                   </div>
+               </div>
+               <br />
+         
+               <button type="submit" class="btncls" >Register</button>
+               </form>
           </div>
        </div>
     </div>

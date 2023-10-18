@@ -6,46 +6,95 @@
                 <h2>Manage Orders</h2>
             </div>
             <div class="col-6 " style=" text-align: right;">
-                <button type="button" class="btncls" (click)="createOrder(userForm.value)"> Submit Bill</button>
+                <button type="button" class="btncls" (click)="createOrder()"> Submit Bill</button>
             </div>
         </div>
       </div>
     
       <div class="card mb-3">
         <h2>Customer Details:</h2>
-      <form #userForm ="ngForm" >
+      <form [formGroup] = 'user' >
         <!-- <form> -->
         <div class="form-row">
           <div class="col">
-            <input type="text" [(ngModel)]="user.name" name="name" class="form-control" placeholder="Name*">
+            <input 
+            type="text" 
+            name="name" 
+            class="form-control" 
+            placeholder="Name*"
+            formControlName ='name'/>
+          </div>
+          <!-- <div class ="alert alert-danger" *ngIf ="name.touched && name.invalid">
+            <div *ngIf="name.errors?.required">Name is required...</div>
+      
+          </div> -->
+          <div class="col">
+            <input 
+            type="email" 
+            name="email" 
+            class="form-control" 
+            placeholder="Email"
+            formControlName ='email'
+            />
+          </div>
+          <!-- <div class ="alert alert-danger" *ngIf ="email.touched && email.invalid">
+            <div *ngIf="email.errors?.required">Name is required...</div>
+      
+          </div> -->
+          <div class="col">
+            <input 
+            type="number"
+            name="contact" 
+            class="form-control" 
+            placeholder="Contact number"
+            formControlName ='contact'
+            />
+            <!-- <div class ="alert alert-danger" *ngIf ="contact.touched && contact.invalid">
+              <div *ngIf="contact.errors?.required">Name is required...</div>
+        
+            </div> -->
           </div>
           <div class="col">
-            <input type="email" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Email">
+            <input 
+            type="text" 
+            name="payment"
+            class="form-control" 
+            placeholder="Payment Method"
+            formControlName ='payment'/>
           </div>
-          <div class="col">
-            <input type="number" [(ngModel)]="user.contact" name="contact" class="form-control" placeholder="Contact number">
-          </div>
-          <div class="col">
-            <input type="text" [(ngModel)]="user.payment" name="payment"class="form-control" placeholder="Payment Method">
-          </div>
+          <!-- <div class ="alert alert-danger" *ngIf ="payment.touched && payment.invalid">
+            <div *ngIf="payment.errors?.required">Name is required...</div>
+      
+          </div> -->
         </div>
       </form>
     </div>
     <div class="card mb-3">
         <h2>Select Product</h2>
    
-        <form>
+        <form [formGroup] = 'details_extra'  #detailsForm="ngForm" >
           <div class="form-row">
             <!-- Category Select -->
             <div class="col">
               <div class="input-group mb-3">
                 <div class="form-group">
-                  <label for="name">Category:</label>
-                <select [(ngModel)]="details.category" class="form-control m-2" name="category" class="custom-select" id="category">
+                  <label>Category:</label>
+                  <select 
+                  class="form-control m-2" 
+                  name="categoryd" 
+                  formControlName ='categoryd'>
                   <option disabled selected>Category</option>
-                  <option *ngFor="let cat of category" [value]="cat.name">{{ cat.name }}</option>
+                  <option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</option>
+                  <!-- <option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</option> -->
                 </select>
+                <!-- {{category[0].name}} -->
               </div>
+              <!-- <div class ="alert alert-danger" *ngIf ="categoryd.touched && categoryd.invalid">
+                <div *ngIf="categoryd.errors?.required">Category is required...</div>
+          
+            
+          </div> -->
+         
             </div>
             </div>
         
@@ -54,11 +103,18 @@
               <div class="input-group mb-3">
                 <div class="form-group">
                   <label for="name">Product:</label>
-                <select [(ngModel)]="details.name" class="form-control m-2" name="name" class="custom-select" id="name">
+                <select 
+                class="form-control m-2" 
+                name="name" 
+                class="custom-select" 
+                id="name"
+                formControlName ='named'
+                >
                   <option disabled selected>Product</option>
                   <option *ngFor="let product of products" [value]="product.name">{{ product.name }}</option>
                 </select>
               </div>
+     
             </div>
             </div>
         
@@ -66,16 +122,28 @@
             <div class="col">
               <div class="form-group">
                 <label for="price">Price:</label>
-              <input type="number" [(ngModel)]="details.price" name="price" class="form-control" placeholder="Price" id="price">
+              <input type="number" 
+              name="price" 
+              class="form-control" 
+              placeholder="Price" 
+              id="price"
+              formControlName ='price'/>
             </div>
+      
             </div>
         
           
             <div class="col">
               <div class="form-group">
                 <label for="quantity">Quantity:</label>
-              <input type="number" [(ngModel)]="details.quantity" name="quantity" class="form-control" placeholder="Quantity" id ="quantity">
+              <input type="number"  
+              name="quantity" 
+              class="form-control" 
+              placeholder="Quantity" 
+              id ="quantity"
+              formControlName ='quantity'/>
             </div>
+   
             </div>
         
           </div>
@@ -109,11 +177,18 @@
                 <tbody>
                   <tr *ngFor="let detail of productDetailsList; let i = index">
                     <td>{{ i + 1 }}</td>
-                    <td>{{ detail.name }}</td>
+                    <td>{{ detail.named }}</td>
                     <td>{{ detail.price }}</td>
                     <td>{{ detail.total }}</td>
-                    <td>{{ detail.category }}</td>
+                    <td>{{ detail.categoryd }}</td>
                     <td>{{ detail.quantity }}</td>
+<!--          
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ details.named }}</td>
+                    <td>{{ details.price }}</td>
+                    <td>{{ details.total }}</td>
+                    <td>{{ details.categoryd }}</td>
+                    <td>{{ details.quantity }}</td> -->
                   </tr>
                 </tbody>
               </table>

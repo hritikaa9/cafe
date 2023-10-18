@@ -10,7 +10,7 @@ require('dotenv').config();
 
 //signup
 const createUser = async (req, res) =>{
-    // console.log(req.body)
+
     try{
 
         const { name, contact, email, password} = req.body;
@@ -23,7 +23,7 @@ const createUser = async (req, res) =>{
         } else{
             const insertQuery = 'INSERT INTO users (name, contact, email, password, status, role) VALUES ($1, $2, $3, $4, $5, $6) returning *';
             const insertValues = [name, contact, email, password, "true", "User"];
-            // console.log("rrrr")
+   
             await client.query(insertQuery, insertValues, (err, result)=>{
                 if (err){
                     return res.status(500).json({ error: 'An error occurred while creating the user.' });
