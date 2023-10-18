@@ -102,22 +102,20 @@ products_detail :any
       this.products_detail.reset();
     })
   }
+ 
   updateProduct(data: any) {
-    this.product.category_id = this.selectedCategoryId;
-    this.product = {...this.products_detail}
-    this.productDetail.updateProduct(this.product, this.product.id).subscribe((updatedData) => {
-      console.log(updatedData);
-      this.loadProduct()
-      const index = this.products.findIndex((item: any) => item.id === this.product.id);
+    this.product = { ...this.products_detail.value };
+    this.productDetail.updateProduct(data, data.id).subscribe((updatedData) => {
+      this.loadProduct();
+      const index = this.products.findIndex((item: any) => item.id === data.id);
   
       if (index !== -1) {
-  
         this.products[index] = updatedData;
         this.dataSource.data = this.products;
-        console.log(this.dataSource.data)
       }
     });
   }
+  
   
 
   loadProduct() {
@@ -175,18 +173,29 @@ deleteProduct(id: any) {
 
 
 
+// getById(id: any) {
+//   $('#productModal').modal('show');
+//   this.productDetail.getProductById(id).subscribe((data: any) => {
+    
+//     this.product = {...data[0]}
+//     this.products_detail ={...this.product}
+//     // console.log("p2", this.products_detail)
+//     // console.log(this.product);
+//     // this.product.id = data[0].id;
+//     // console.log(this.product.id);
+//     // this.product.name = data[0].name;
+//     // this.product.price = data[0].price;
+//     // this.product.description = data[0].description;
+//     // this.product.categoryname = data[0].categoryname;
+//     this.selectedCategoryId = data[0].category_id;
+//   });
+// }
+
 getById(id: any) {
   $('#productModal').modal('show');
   this.productDetail.getProductById(id).subscribe((data: any) => {
-    
-    this.product = {...data[0]}
-    // console.log(this.product);
-    // this.product.id = data[0].id;
-    // console.log(this.product.id);
-    // this.product.name = data[0].name;
-    // this.product.price = data[0].price;
-    // this.product.description = data[0].description;
-    // this.product.categoryname = data[0].categoryname;
+    this.product = { ...data[0] };
+    this.products_detail.patchValue(this.product); 
     this.selectedCategoryId = data[0].category_id;
   });
 }
